@@ -20,8 +20,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // يمكنك تعديل هذا لتقييد الوصول إلى النطاقات المطلوبة فقط
+    origin: "*", // يسمح بجميع المصادر
     methods: ["GET", "POST"],
+    allowedHeaders: ["Authorization"],
+    credentials: true,
   },
 });
 const __filename = fileURLToPath(import.meta.url);
@@ -32,7 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.json());
-app.use(cors());
+app.use(cors()); 
 
 app.get("/signup", (req, res) => {
   res.render("signup");

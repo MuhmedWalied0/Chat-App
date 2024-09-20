@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.location.href = "login";
     return;
   }
-  const socket = await io({
+  alert(window.location.href)
+  const socket = await io(window.location.href, {
     extraHeaders: {
       Authorization: `Bearer ${token}`,
     },
   });
-
   const chatList = document.getElementById("chat-list");
   const chatName = document.getElementById("chat-name");
   const chatStatus = document.getElementById("chat-status");
@@ -118,13 +118,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     messageList.innerHTML = "";
 
     try {
-      const response = await fetch(`/api/private-chats/${chatId}/messages/`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `/api/private-chats/${chatId}/messages/`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         const messages = await response.json();
@@ -179,7 +182,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       // تحديث معلومات الشات في الواجهة
       chatStatus.textContent = status;
       chatName.textContent = name;
-      socket.emit("updateUnreadCount", { chatId, unreadMessagesCount: 0 });
+      socket.emit("updateUnreadCount",{ chatId, unreadMessagesCount:0 })
       // العثور على عنصر الشات المراد
       const chatElement = document.querySelector(
         `.chat-link[data-chat-id="${chatId}"]`
