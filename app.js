@@ -114,5 +114,7 @@ io.on("connection", async (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log("Server is running on port 3000");
+  const address = server.address();
+  const serverUrl = `http://${address.address}:${address.port}`; // أو https إذا كنت تستخدم HTTPS
+  console.log(serverUrl)
 });
