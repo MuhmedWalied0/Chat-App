@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/users/current/password/change-password",
+        "/api/users/current/password/change-password",
         {
           method: "PUT",
           headers: {

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
   try {
-    const response = await fetch("http://localhost:3000/api/private-chats/", {
+    const response = await fetch("/api/private-chats/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/private-chats/${chatId}/messages/`,
+        `/api/private-chats/${chatId}/messages/`,
         {
           method: "GET",
           headers: {

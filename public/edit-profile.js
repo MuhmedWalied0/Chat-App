@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   let fristNameValue, lastNameValue, usernameValue, emailValue;
 
   try {
-    const response = await fetch("http://localhost:3000/api/users/current/", {
+    const response = await fetch("/api/users/current/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/users/current/", {
+      const response = await fetch("/api/users/current/", {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

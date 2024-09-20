@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (confirm("هل أنت متأكد أنك تريد حذف حسابك؟")) {
       try {
         const response = await fetch(
-          "http://localhost:3000/api/users/current",
+          "/api/users/current",
           {
             method: "DELETE",
             headers: {
