@@ -204,7 +204,6 @@ h1 {
     background-color: #000000;
 }
 
-/* تعديل التنسيق للغة العربية */
 .message-content[lang="ar"] {
     direction: rtl;
     text-align: right;
@@ -335,17 +334,46 @@ button#send-button:hover {
     padding: 15px;
 }
 
-.message-input-container {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    border-top: 1px solid #ddd;
-    background-color: #f9f9f9;
-    box-shadow: 0 -1px 2px rgba(0,0,0,0.1);
-    transition: opacity 0.3s ease;
-}
-
 .message-input-container.hidden {
     opacity: 0;
     pointer-events: none;
+}
+
+/* تصميمات المستجيب */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* تقليل الحشو على الشاشات الصغيرة */
+    }
+
+    .main-content {
+        flex-direction: column; /* تغيير الاتجاه إلى عمودي على الشاشات الصغيرة */
+    }
+
+    .chat-list-container,
+    .chat-details-container {
+        width: 100%; /* جعل كل قسم يأخذ العرض الكامل */
+    }
+
+    .message-input-container {
+        display: flex;
+        flex-direction: column; /* جعل الإدخال والمكان المناسب في عمود */
+    }
+
+    textarea {
+        width: 100%; /* جعل textarea يأخذ العرض الكامل */
+    }
+
+    button {
+        width: 100%; /* جعل الزر يأخذ العرض الكامل */
+    }
+}
+
+@media (min-width: 769px) {
+    .chat-list-container {
+        width: 30%; /* تخصيص عرض قائمة الدردشة */
+    }
+
+    .chat-details-container {
+        width: 70%; /* تخصيص عرض تفاصيل الدردشة */
+    }
 }
