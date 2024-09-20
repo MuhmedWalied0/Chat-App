@@ -26,7 +26,7 @@ document
         localStorage.setItem("token", data.token);
         localStorage.setItem("email", data.email);
         localStorage.setItem("username", data.username);
-        window.location.href = "home";
+        window.location.href = "/";
       } else if (response.status === 400) {
         displayErrors(resuslt.errors);
       } else {
