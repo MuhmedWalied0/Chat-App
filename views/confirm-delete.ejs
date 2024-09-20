@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأكيد حذف الحساب</title>
+    <link rel="stylesheet" href="confirm-delete.css">
+    <script src="confirm-delete.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>تأكيد حذف الحساب</h1>
+        <p>يرجى إدخال كلمة المرور لتأكيد حذف حسابك:</p>
+        <form id="confirm-delete-form">
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" name="password" required>
+            <span id="password-error" class="error-message"></span> <!-- مكان رسالة الخطأ -->
+            
+            <button id="delete-account-button" type="submit">حذف الحساب</button>
+        </form>
+        <a href="user-profile" class="back-link">العودة إلى صفحة الحساب</a>
+    </div>
+</body>
+</html>

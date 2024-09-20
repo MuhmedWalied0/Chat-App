@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الرئيسية</title>
+    <link rel="stylesheet" href="home.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.min.js"></script>
+    <script defer src="home.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="welcome-message">مرحبا بك في الصفحة الرئيسية</h1>
+            <div class="buttons">
+                <a href="user-profile" class="button profile-button">عرض معلومات الحساب</a>
+                <a href="#" id="logout-button" class="button logout-button">تسجيل الخروج</a>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <aside class="chat-list-container">
+                <div class="chat-list">
+                    <ul id="chat-list">
+                        <li class="chat-item">
+                            <a href="#" class="chat-link">
+                                <div class="chat-preview">
+                                    <div class="chat-avatar">
+                                        <img src="photo/profile-user-icon-2048x2048-m41rxkoe.png" alt="Avatar">
+                                    </div>
+                                    <div class="chat-info">
+                                        <h3>اسم الدردشة</h3>
+                                        <p>آخر رسالة هنا...</p>
+                                        <span class="chat-time">12:30 م</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <section class="chat-details-container">
+                <div class="chat-details-header hidden">
+                    <div class="chat-details-header-content">
+                        <div class="chat-details-avatar">
+                            <img src="./photo/profile-user-icon-2048x2048-m41rxkoe.png" alt="Avatar">
+                        </div>
+                        <div class="chat-details-info">
+                            <h2 id="chat-name" class="chat-details-name">اسم الشخص</h2>
+                            <p id="chat-status" class="chat-details-status">حالة الشخص</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-details hidden">
+                    <div class="message-list" id="message-list">
+                    </div>
+                    <div class="message-input-container">
+                        <textarea id="message-input" placeholder="اكتب رسالتك هنا..."></textarea>
+                        <button id="send-button" class="button">إرسال</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

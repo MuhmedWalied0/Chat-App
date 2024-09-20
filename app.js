@@ -6,13 +6,16 @@ import "dotenv/config";
 import "./config/database.js";
 import jwt from "jsonwebtoken";
 import chatMessage from "./soket.io/Message.js";
-import { isValidChat } from "./utils/checkPrivateChat.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import PrivateChat from "./routes/privateChats.js";
 import Message from "./routes/messages.js";
 import Messages from "./Models/messages.js";
 import Users from "./Models/users.js";
 import User from "./routes/users.js";
 import moment from "moment";
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -21,10 +24,41 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
+app.use(express.static(path.join(__dirname, "public")));
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(cors());
 
+app.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.get("/home", (req, res) => {
+  res.render("home");
+});
+
+app.get("/user-profile", (req, res) => {
+  res.render("user-profile");
+});
+
+app.get("/edit-profile", (req, res) => {
+  res.render("edit-profile");
+});
+
+app.get("/confirm-delete", (req, res) => {
+  res.render("confirm-delete");
+});
+app.get("/change-password", (req, res) => {
+  res.render("change-password");
+});
 app.use("/api/users", User);
 app.use("/api/messages", Message);
 app.use("/api/private-chats", PrivateChat);
