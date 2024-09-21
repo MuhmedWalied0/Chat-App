@@ -30,15 +30,14 @@ document
       } else if (response.status === 400) {
         displayErrors(resuslt.errors);
       } else {
-        alert(`حدث خطأ: ${JSON.stringify(resuslt)}`);
+        console.error(`حدث خطأ: ${JSON.stringify(resuslt)}`);
       }
     } catch (error) {
-      alert("تعذر الاتصال بالخادم. حاول مرة أخرى لاحقًا.");
       console.error("Error:", error);
     }
   });
+
 function displayErrors(errors) {
-  
   document
     .querySelectorAll(".error-message")
     .forEach((el) => (el.textContent = ""));
@@ -51,19 +50,17 @@ function displayErrors(errors) {
     }
     if (inputElement) {
       inputElement.classList.add("error");
-  }
+    }
   });
 }
-function clearErrors() {
-  // إزالة جميع حواف الخطأ
-  const errorFields = document.querySelectorAll(".error");
-  errorFields.forEach(field => {
-      field.classList.remove("error");
-  });
 
-  // مسح رسائل الأخطاء
+function clearErrors() {
+  const errorFields = document.querySelectorAll(".error");
+  errorFields.forEach((field) => {
+    field.classList.remove("error");
+  });
   const errorMessages = document.querySelectorAll(".error-message");
-  errorMessages.forEach(message => {
-      message.textContent = '';
+  errorMessages.forEach((message) => {
+    message.textContent = "";
   });
 }

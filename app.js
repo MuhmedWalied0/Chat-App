@@ -14,8 +14,7 @@ import Message from "./routes/messages.js";
 import Messages from "./Models/messages.js";
 import Users from "./Models/users.js";
 import User from "./routes/users.js";
-import moment from "moment";
-
+import authSocket from "./middlewares/authSocket.js";
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -34,7 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.json());
-app.use(cors()); 
+app.use(cors());
 
 app.get("/signup", (req, res) => {
   res.render("signup");
@@ -65,24 +64,7 @@ app.use("/api/users", User);
 app.use("/api/messages", Message);
 app.use("/api/private-chats", PrivateChat);
 
-io.use(async (socket, next) => {
-  const token = socket.handshake.headers.authorization?.split(" ")[1];
-
-  if (!token) {
-    next(new Error("Authentication error"));
-  }
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY_TOKEN);
-    socket.userId = decoded.id;
-    const user = await Users.findById(socket.userId);
-    user.isOnline = true;
-    await user.save();
-    socket.emit("userStatus", { userId: socket.userId, status: "online" });
-    next();
-  } catch (error) {
-    next(new Error("Authentication error"));
-  }
-});
+io.use(authSocket);
 
 io.on("connection", async (socket) => {
   console.log("A user connected ", socket.userId);
@@ -90,7 +72,7 @@ io.on("connection", async (socket) => {
   socket.on("joinChat", (chatId) => {
     socket.join(chatId);
   });
-
+ 
   chatMessage(socket, io);
 
   socket.on("openChat", async (data) => {
@@ -116,5 +98,5 @@ io.on("connection", async (socket) => {
 server.listen(3000, () => {
   const address = server.address();
   const serverUrl = `http://${address.address}:${address.port}`; // أو https إذا كنت تستخدم HTTPS
-  console.log(serverUrl)
+  console.log(serverUrl);
 });

@@ -2,8 +2,6 @@ document
   .getElementById("signup-form")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
-
-    // جمع البيانات من النموذج
     const firstName = document.getElementById("first-name").value;
     const lastName = document.getElementById("last-name").value;
     const username = document.getElementById("username").value;
@@ -33,12 +31,11 @@ document
         localStorage.setItem("username", resuslt.user.username);
         window.location.href = "home";
       } else if (response.status === 400) {
-        alert(`حدث خطأ: ${JSON.stringify(resuslt.errors)}`);
+        console.error(`حدث خطأ: ${JSON.stringify(resuslt.errors)}`);
       } else {
-        alert(`حدث خطأ: ${JSON.stringify(resuslt)}`);
+        console.error(`حدث خطأ: ${JSON.stringify(resuslt)}`);
       }
     } catch (error) {
-      alert("تعذر الاتصال بالخادم. حاول مرة أخرى لاحقًا.");
       console.error("Error:", error);
     }
   });

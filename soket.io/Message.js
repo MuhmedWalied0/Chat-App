@@ -36,21 +36,12 @@ const chatMessage = (socket, io) => {
         time: moment(message.createdAt).format("h:mm A"),
         chatId,
       });
-      io.to(chatId).emit("messageStatus", {
-        lastMessage: message.content,
-        time: moment(message.createdAt).format("h:mm A"),
-        chatId,
-      });
-      const unreadMessagesCount = await Message.countDocuments({
-        chat: chatId,
-        status: { $ne: "seen" },
-        sender: socket.userId,
-      });
 
-    //   socket.to(chatId).emit("updateUnreadCount", {
-    //     chatId,
-    //     unreadMessagesCount,
-    //   });
+      // const unreadMessagesCount = await Message.countDocuments({
+      //   chat: chatId,
+      //   status: { $ne: "seen" },
+      //   sender: socket.userId,
+      // });
     }
   });
 };

@@ -35,10 +35,7 @@ export const getChats = async (req, res, next) => {
         fiend: participant?._id,
         status: participant?.isOnline,
         lastMessage: {
-          sender:
-            chat.lastMessage.sender.toString() === req.user.id
-              ? "me"
-              : participant?.username,
+          sender: chat.lastMessage.sender.toString(),
           content: chat.lastMessage.content,
           status: chat.lastMessage.status,
           time: formatTime(chat.lastMessage.createdAt),
